@@ -1,0 +1,10 @@
+/home/pau/Escritorio/Programacion /ejercicios/008escribir en archivo de la carpeta.py
+/home/pau/Escritorio/Programacion /ejercicios/002atributos.py
+/home/pau/Escritorio/Programacion /ejercicios/007condicion.py
+/home/pau/Escritorio/Programacion /ejercicios/005recorrer.py
+/home/pau/Escritorio/Programacion /ejercicios/001listar contenido de carpeta.py
+/home/pau/Escritorio/Programacion /ejercicios/006 tamaño recursivo.py
+/home/pau/Escritorio/Programacion /ejercicios/004 suma del tamaño.py
+/home/pau/Escritorio/Programacion /ejercicios/mapa.txt
+/home/pau/Escritorio/Programacion /ejercicios/003 formateo el resultado.py
+json

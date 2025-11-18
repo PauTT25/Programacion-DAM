@@ -1,0 +1,52 @@
+Comandos MyS
+
+Abrimos terminal:
+
+sudo mysql -u Pau -p
+sudo = el superusuario va a hacer algo
+mysql = ejecutamos mysql
+-u = quiero entrar con un usuario
+pau = el nombre del usuario con el cual quiero entrar
+-p = y pideme la contraseña
+
+COMANDOS MySQL:
+
+recordar nombre usuario:
+whoami
+
+SHOW DATABASES();  #Ver bases de datos
+
+CREATE DATABASE empresadam;   #Crear base de datos
+
+USE empresadam;    #Con este comando entramos en la base de datos 
+
+ALTER TABLE clientes
+  ADD CONSTRAINT comprobar_email
+  CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
+  
+-Aqui eliminamos los registros que no cumplen-
+   
+DELETE FROM clientes WHERE identificador = 4; -- en este caso
+DELETE FROM clientes WHERE identificador = 5; -- en este caso
+DROP TABLE y el respectivo nombre de la tabla; -- Borrar tabla 
+
+
+SELECT * FROM clientes;
+
+-- Ahora si, aplicamos--
+ALTER TABLE clientes
+  ADD CONSTRAINT comprobar_email
+  CHECK (email REGEXP '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$');
+  
+INSERT INTO clientes VALUES(
+  NULL,
+  '12345678A'
+  'nombre del cliente'
+  'apellidos del cliente'
+  'algo'
+  );
+
+---Para salir de MySQL y entrar en la consola---
+quit;
+
+

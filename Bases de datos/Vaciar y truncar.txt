@@ -1,0 +1,28 @@
+DELETE FROM clientes; -- lo borra todo--
+
+INSERT INTO clientes VALUES(
+ NULL,
+'12345678Z',
+   'Pau Contreras',
+   'MEC MEC',
+   'tec@gmail.com'
+   );
+
+SELECT * FROM clientes; 
+
+TRUNCATE TABLE clientes; --- Esto resetea la tabla pero no se la carga---
+
+INSERT INTO clientes VALUES (
+ NULL
+'12345678Z',
+   'Pau Contreras',
+   'MEC MEC',
+   'tec@gmail.com'
+   );
+   
+SELECT * FROM clientes;
+
+DROP TABLE clientes; ---CON ESTO CUIDADO PORQUE BORRA LA TABLA---
+
+
+ 

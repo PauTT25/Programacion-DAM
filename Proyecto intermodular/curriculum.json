@@ -1,0 +1,12 @@
+{
+  "datos personales":{
+  	"nombre" : "Pau",
+  	"apellidos" : "Contreras Romero",
+  	"email" : "contrerasromeropau@gmail.com",
+  	"telefono" : "664388710",
+  	"direccion" : "Calle de Pau",
+  	"codigopostal" : "46171"
+  },
+  "experiencia":"",
+  "formación":""
+  }

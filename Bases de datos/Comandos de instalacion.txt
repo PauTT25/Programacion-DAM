@@ -1,0 +1,13 @@
+Comandos de instalacion de MySQL
+
+En la maquina virtual:
+Control+Mayusculas+T: Abrir un terminal
+
+sudo apt install mysql-server
+
+sudo = super user do = el superusuario va a hacer algo
+apt = gestor de paquetes de Debian Linux
+install = operacion de instalar
+MySQL-server = el paquete a instalar 
+
+

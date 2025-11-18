@@ -1,0 +1,20 @@
+INSERT INTO clientes values(
+
+   '12345678A',
+   'Pau Contreras',
+   'MEC MEC',
+   'tec@gmail.com'
+   );
+ERROR 3819 (HY000): Check constraint 'comprobar_dni_nie_letra' is violated.
+
+INSERT INTO clientes VALUES(
+  NULL,
+  '12345678Z',
+  'Pau Contreras',
+   'MEC MEC',
+   'correoincorrecto'
+   );
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+   
+   
+

@@ -1,0 +1,21 @@
+<!doctype>
+<hmtl lang="es">
+  <head>
+    <title>Microblog</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <header><h1>El blog de Pau</h1></header>
+    <main></main>
+    <footer>(c) 2025 Pau Contreras Romero </footer>
+    <script>
+      const articulos = [
+        "Primer articulo", "Segundo articulo", "Tercer articulo"
+      ];
+      const contenedor = document.querySelector("main");
+      for(let i= 0;i<articulos.length;i++){   //Recorro los articulos
+        contenedor.innerHTML += "<h3>"+articulos[i]+"</h3>";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+   "datos_personales":{
+	"nombre" : "Pau",
+	"apellidos" : "Contreras Romero",
+	"correo" : "contrerasromeropau@gmail.com",
+	"telefonos" : ["123455678", "543671245"]
+	
+   },
+   "experiencias_laborales":[
+   	{
+   		"titulo" : "informatico en proceso",
+   		"empresa": "CEAC",
+   		"timespan" : "2025-presente",
+   		"descripcion" : "Estudiante en grado superior de DAM"
+   	},
+   	{
+   		"titulo" : "informatico en proceso",
+   		"empresa": "CEAC",
+   		"timespan" : "2025-presente",
+   		"descripcion" : "Estudiante en grado superior de DAM"
+   	}
+   ]
+   
+}

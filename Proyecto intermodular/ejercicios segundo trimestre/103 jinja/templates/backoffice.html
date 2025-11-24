@@ -7,16 +7,51 @@
       html,body{background:LightSalmon;width:100%;height:100%;padding:0px;margin:0px;}
       header{padding:15px;margin:5px;}
       main{display:flex;height:100%;}
-      nav{flex:1;color:white;padding:20px;}
+      nav{flex:1;color:white;padding:20px;display:flex;flex-direction:column;gap:20px}
       section{flex:5;background:white;padding:20px;}
+      nav a{background:white;color:indigo;padding:20px;}
     </style>
   </head>
   <body>
     <header><h1>Aplicacion empresarial superchula de Pau</h1></header>
     <main>
       <nav>
+      	{%for tabla in mis_tablas:%}
+      	  <a>{{tabla}}</a>
+      	 {%endfor%}
       </nav>
       <section>
+      	<style>
+      		table{width:100%;border:5px solid Khaki;border-collapse:collapse;}
+      		table th, table td {padding:10px;}
+      		table thead{background:IndianRed;color:white;}
+      	</style>
+      	<table>
+      	 <thead>
+      	  <tr>
+      	     {% for columna in mis_columnas:%}
+                <th>{{columna}}</th>
+              {% endfor %}
+      	  </tr>
+      	 </thead>
+      	 <tbody>
+      	 	{%for fila in mi_contenido_tabla:%}
+      	  <tr>
+      	  	{%for dato in fila:%}
+      	  		<td>{{dato}}</td>
+      	  	{% endfor %}
+      	  </tr>
+      	  {% endfor %}
+      	    <td>Jose</td><td>Garcia</td><td>jose@gmail.com</td><td>Calle de Jose</td>
+      	  </tr>
+      	  <tr>
+      	    <td>Jose</td><td>Garcia</td><td>jose@gmail.com</td><td>Calle de Jose</td>
+      	  </tr>
+      	  <tr>
+      	    <td>Jose</td><td>Garcia</td><td>jose@gmail.com</td><td>Calle de Jose</td>
+      	  </tr>
+      	 </tbody>
+      	</table>
       </section>
     </main>
   </body>

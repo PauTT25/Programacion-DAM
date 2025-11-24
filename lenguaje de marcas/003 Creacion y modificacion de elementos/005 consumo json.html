@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+   <head>
+   </head>
+   <body>
+       <nav></nav>
+       <script>
+          // Ves y busca este archivo
+          fetch("botones.json")
+          .then(function(respuesta){
+          	return respuesta.json();	// Encuentra la respuesta que le pedimos, siempre en JSON
+          })
+          
+          //Muestra la respuesta en la consola
+          .then(function(datos){
+          		console.log(datos);
+          })         
+       </script>
+   </body>
+</html>

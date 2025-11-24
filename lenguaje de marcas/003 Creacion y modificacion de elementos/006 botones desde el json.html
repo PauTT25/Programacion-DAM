@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+   <head>
+   </head>
+   <body>
+       <nav></nav>
+       <script>
+          // Ves y busca este archivo
+          fetch("botones.json")
+          .then(function(respuesta){
+          		return respuesta.json();	// Encuentra la respuesta que le pedimos, siempre en JSON
+          })
+          
+          //Muestra la respuesta en la consola
+          .then(function(datos){
+          		let contenedor = document.querySelector("nav")
+          		datos.forEach(function(texto_boton){
+          				let boton = document.createElement("button")
+          			boton.textContent = texto_boton;
+          			contenedor.appendChild(boton);
+          		})
+          })         
+       </script>
+   </body>
+</html>

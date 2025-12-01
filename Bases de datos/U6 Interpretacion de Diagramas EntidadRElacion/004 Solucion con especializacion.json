@@ -1,0 +1,99 @@
+{
+  "formas": [
+    {
+      "id": "forma-1",
+      "tipo": "entity",
+      "left": "566px",
+      "top": "173px",
+      "width": "",
+      "height": "",
+      "entityName": "Alumno",
+      "properties": [
+        {
+          "id": "prop-1",
+          "name": "id"
+        },
+        {
+          "id": "prop-8",
+          "name": "nombre"
+        },
+        {
+          "id": "prop-9",
+          "name": "apellidos"
+        },
+        {
+          "id": "prop-14",
+          "name": "email"
+        }
+      ]
+    },
+    {
+      "id": "forma-7",
+      "tipo": "entity",
+      "left": "292px",
+      "top": "424px",
+      "width": "",
+      "height": "",
+      "entityName": "Alumno Presencial",
+      "properties": [
+        {
+          "id": "prop-15",
+          "name": "id"
+        },
+        {
+          "id": "prop-17",
+          "name": "asistencia"
+        }
+      ]
+    },
+    {
+      "id": "forma-8",
+      "tipo": "entity",
+      "left": "798px",
+      "top": "419px",
+      "width": "",
+      "height": "",
+      "entityName": "Alumno Distancia",
+      "properties": [
+        {
+          "id": "prop-16",
+          "name": "id"
+        },
+        {
+          "id": "prop-18",
+          "name": "virtualizacion"
+        }
+      ]
+    }
+  ],
+  "flechas": [
+    {
+      "desde": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-7",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-8",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    }
+  ]
+}

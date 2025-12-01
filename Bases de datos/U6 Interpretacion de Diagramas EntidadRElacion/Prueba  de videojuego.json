@@ -1,0 +1,136 @@
+{
+  "formas": [
+    {
+      "id": "forma-1",
+      "tipo": "entity",
+      "left": "529px",
+      "top": "113px",
+      "width": "",
+      "height": "",
+      "entityName": "Npc",
+      "properties": [
+        {
+          "id": "prop-1",
+          "name": "id"
+        },
+        {
+          "id": "prop-5",
+          "name": "posx"
+        },
+        {
+          "id": "prop-6",
+          "name": "posy"
+        },
+        {
+          "id": "prop-7",
+          "name": "posz"
+        },
+        {
+          "id": "prop-11",
+          "name": "arma"
+        }
+      ]
+    },
+    {
+      "id": "forma-2",
+      "tipo": "entity",
+      "left": "854px",
+      "top": "321px",
+      "width": "",
+      "height": "",
+      "entityName": "Ingeniero",
+      "properties": [
+        {
+          "id": "prop-2",
+          "name": "id"
+        }
+      ]
+    },
+    {
+      "id": "forma-3",
+      "tipo": "entity",
+      "left": "216px",
+      "top": "322px",
+      "width": "",
+      "height": "",
+      "entityName": "Soldado",
+      "properties": [
+        {
+          "id": "prop-3",
+          "name": "id"
+        },
+        {
+          "id": "prop-8",
+          "name": ""
+        },
+        {
+          "id": "prop-10",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "id": "forma-4",
+      "tipo": "entity",
+      "left": "538px",
+      "top": "322px",
+      "width": "",
+      "height": "",
+      "entityName": "Francotirador",
+      "properties": [
+        {
+          "id": "prop-4",
+          "name": "id"
+        },
+        {
+          "id": "prop-9",
+          "name": ""
+        }
+      ]
+    }
+  ],
+  "flechas": [
+    {
+      "desde": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-3",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-4",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    },
+    {
+      "desde": {
+        "shapeId": "forma-1",
+        "propId": null,
+        "side": null
+      },
+      "hasta": {
+        "shapeId": "forma-2",
+        "propId": null,
+        "side": null
+      },
+      "tipo": "simple",
+      "estilo": "straight"
+    }
+  ]
+}

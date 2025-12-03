@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<curriculum>
+    <informacionPersonal>
+        <nombre>Pau Contreras Romero</nombre>
+        <sobreMi>
+            Soy un estudiante de 20 años con formación en informática, con la titulación de grado medio en SMR y
+            actualmente cursando el primer año de grado superior en DAM. Interesado en un futuro poder trabajar
+            en ciberseguridad y manejo complejo de IA.
+        </sobreMi>
+
+        <contacto>
+            <telefono>664388710</telefono>
+            <correo>contrerasromeropau@gmail.com</correo>
+            <direccion>Calle X 40, Y</direccion>
+        </contacto>
+
+        <imagen>palomasentada.jpg</imagen>
+    </informacionPersonal>
+
+    <educacion>
+        <centro>
+            <nombre>Instituto CEAC</nombre>
+            <años>2025-2027</años>
+            <formacion>Grado superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</formacion>
+        </centro>
+        <centro>
+            <nombre>Instituto MEDAC</nombre>
+            <años>2022-2024</años>
+            <formacion>Grado medio en Sistemas Microinformáticos y Redes (SMR)</formacion>
+        </centro>
+    </educacion>
+
+    <idiomas>
+        <idioma>
+            <nombre>Inglés</nombre>
+            <nivel>B1-B2 (Sin certificar)</nivel>
+        </idioma>
+        <idioma>
+            <nombre>Español</nombre>
+            <nivel>Nativo</nivel>
+        </idioma>
+    </idiomas>
+
+    <experienciaLaboral>
+        <experiencia>
+            Trabajé como camarero y ayudante en barra en un restaurante de un pueblo, en el cual desarrollé agilidad
+            y saber llevar los momentos de alta demanda en horas punta.
+        </experiencia>
+    </experienciaLaboral>
+
+    <conceptosAprendidos>
+        <concepto>Ofimática avanzada</concepto>
+        <concepto>Bases de datos y programación</concepto>
+        <concepto>Desarrollo de páginas web</concepto>
+    </conceptosAprendidos>
+</curriculum>
+

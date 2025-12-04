@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ejecutor de Código</title>
+    <style>
+  :root{
+    --glass-bg: rgba(255,255,255,0.06);  /* Más opaco */
+    --accent: #00ffae;
+    --accent-soft: #7cffd6;
+    --text-bright: #f2f9ff;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0f1a, #0d1b2a);
+    font-family: "Segoe UI", sans-serif;
+    color: var(--text-bright);
+  }
+
+  header {
+    margin-top: 28px;
+    text-align: center;
+    padding: 18px 14px;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--text-bright);
+    text-shadow: 0 0 12px rgba(0,255,200,0.4);
+  }
+
+  .sub {
+    margin-top: -8px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .panel {
+    border-radius: 14px;
+    padding: 18px;
+    background: rgba(15,25,35,0.75);   /* MÁS OPACO para mayor contraste */
+    box-shadow: 0 8px 40px rgba(0,0,0,0.7),
+                0 0 30px rgba(0,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    backdrop-filter: blur(8px);
+  }
+
+  #editor {
+    font-family: Consolas, monospace;
+    padding: 20px;
+    min-height: 420px;
+    font-size: 16px;
+    color: var(--text-bright);  /* TEXTO MÁS CLARO */
+    text-shadow: 0 0 6px rgba(0,255,255,0.25);  /* BRILLO */
+    background: rgba(0,0,0,0.55); /* más sólido */
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    overflow-y: auto;
+  }
+
+  #editor:hover {
+    box-shadow: 0 0 20px rgba(0,255,255,0.25);
+  }
+
+  /* Placeholder más visible */
+  #editor:empty:before {
+    color: rgba(255,255,255,0.37);
+    text-shadow: none;
+  }
+
+  .terminal-card {
+    background: rgba(0,0,0,0.85);
+    border: 1px solid rgba(0,255,150,0.25);
+    box-shadow: 0 0 12px rgba(0,255,150,0.18);
+  }
+
+  #terminal {
+    font-family: Consolas, monospace;
+    padding: 16px;
+    height: 360px;
+    font-size: 14px;
+    color: var(--accent-soft);
+    text-shadow: 0 0 7px rgba(0,255,150,0.6);  /* GLOW MÁS FUERTE */
+    background: rgba(0,0,0,0.9);
+    border: 1px solid rgba(0,255,150,0.3);
+    border-radius: 8px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+
+  button.btn {
+    background: linear-gradient(90deg, #00ffaa, #00dd88);
+    color: #042515;
+    font-weight: 900;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0,255,160,0.45),
+                0 0 60px rgba(0,255,140,0.12);
+  }
+
+  button.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 38px rgba(0,255,160,0.65),
+                0 0 80px rgba(0,255,140,0.4);
+  }
+
+  .meta {
+    color: rgba(255,255,255,0.7);  /* Más legible */
+    font-size: 14px;
+  }
+
+  footer {
+    color: rgba(255,255,255,0.25);
+    font-size: 12px;
+    margin-bottom: 36px;
+  }
+</style>
+
+  </head>
+  <body>
+    <header>
+      	Compilador de codigo en python
+      <div class="sub">Pulsa <strong>Compilar</strong> o <strong>Ctrl+Enter</strong> para ejecutar</div>
+    </header>
+
+    <main>
+      <!-- EDITOR + CONTROLES (panel) -->
+      <section class="panel">
+        <div class="titulo">
+          <div class="badge"></div>
+          <div style="flex:1">
+            <div style="font-weight:800;font-size:15px">Editor</div>
+            <div class="meta">Escribe tu código aquí. El editor conserva saltos de línea y tabulaciones.</div>
+          </div>
+
+          <div class="controls">
+            <button class="btn small" id="limpiar">Limpiar</button>
+            <button class="btn" id="compilar">Compilar</button>
+          </div>
+        </div>
+
+        <!-- Editor: conserva id #editor y contenteditable -->
+        <div id="editor" contenteditable="true" data-placeholder="Escribe código Python aquí. Ejemplo: 
+print('Hola mundo')
+for i in range(3):
+    print(i)
+"></div>
+
+        <div style="margin-top:12px;color:var(--muted);font-size:13px">
+          Sugerencias: usa <kbd>Tab</kbd> para insertar tabulador, <kbd>Ctrl+Enter</kbd> para ejecutar.
+        </div>
+      </section>
+
+      <!-- PANEL LATERAL -->
+      <aside class="side">
+        <div class="terminal-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div style="font-weight:800">Terminal</div>
+            <div style="font-size:13px;color:var(--muted)">Salida del servidor</div>
+          </div>
+          <!-- Terminal: conserva id #terminal y contenteditable -->
+          <div id="terminal" contenteditable="true" aria-label="Terminal"></div>
+          <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+            <button class="btn small" id="copiar">Copiar</button>
+            <button class="btn small" id="descargar">Descargar</button>
+          </div>
+        </div>
+
+        <div class="panel" style="padding:12px;">
+          <div style="font-weight:700;margin-bottom:8px">Información</div>
+          <div class="meta">El backend debe exponer la ruta <code>/api</code> que reciba texto plano (text/plain). Esta interfaz envía el contenido de <code>#editor</code> y coloca la respuesta en <code>#terminal</code>.</div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>Editor con terminal para ejecutar programas en Python</footer>
+
+    <script>
+      (function(){
+        // ELEMENTOS
+        const editor = document.getElementById('editor');
+        const terminal = document.getElementById('terminal');
+        const compilarBtn = document.getElementById('compilar');
+        const limpiarBtn = document.getElementById('limpiar');
+        const copiarBtn = document.getElementById('copiar');
+        const descargarBtn = document.getElementById('descargar');
+
+        // Inserta ejemplo inicial si está vacío
+        if (!editor.textContent.trim()) {
+          editor.textContent = "print('Hola mundo')\n# Prueba: Ctrl+Enter o pulsa Compilar";
+        }
+
+        // Inserta un tab dentro de contenteditable al pulsar Tab
+        editor.addEventListener('keydown', function(e){
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            const sel = window.getSelection();
+            const range = sel.getRangeAt(0);
+            const tabNode = document.createTextNode('\t');
+            range.insertNode(tabNode);
+            // mover caret después del tab
+            range.setStartAfter(tabNode);
+            range.setEndAfter(tabNode);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            editor.dispatchEvent(new Event('input'));
+          }
+          // Ejecutar con Ctrl+Enter o Cmd+Enter
+          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            runCode();
+          }
+        });
+
+        // Limpiar editor
+        limpiarBtn.addEventListener('click', function(){
+          editor.textContent = '';
+          editor.focus();
+        });
+
+        // Copiar terminal
+        copiarBtn.addEventListener('click', async function(){
+          try {
+            await navigator.clipboard.writeText(terminal.textContent);
+            copiarBtn.textContent = 'Copiado ✓';
+            setTimeout(()=> copiarBtn.textContent = 'Copiar', 1200);
+          } catch (err) {
+            console.error(err);
+            copiarBtn.textContent = 'Error';
+            setTimeout(()=> copiarBtn.textContent = 'Copiar', 1200);
+          }
+        });
+
+        // Descargar salida como .txt
+        descargarBtn.addEventListener('click', function(){
+          const blob = new Blob([terminal.textContent], {type: 'text/plain;charset=utf-8'});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'salida.txt';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        });
+
+        // Habilita / deshabilita botón y estado visual
+        function setBusy(isBusy){
+          compilarBtn.disabled = isBusy;
+          if (isBusy) {
+            compilarBtn.textContent = 'Ejecutando...';
+          } else {
+            compilarBtn.textContent = 'Compilar';
+          }
+        }
+
+        // Mostrar resultado en terminal con estado (ok/error)
+        function showResult(text, ok=true){
+          terminal.textContent = text || (ok ? 'OK' : 'Sin salida');
+          // clases visuales
+          const card = terminal.closest('.terminal-card');
+          if (card) {
+            card.classList.toggle('ok', ok);
+            card.classList.toggle('error', !ok);
+          }
+        }
+
+        // Ejecuta el código: envío a /api
+        async function runCode(){
+          // Prepara texto: tomamos texto plano con saltos de línea
+          let codigo = editor.innerText;
+          // Normalizar saltos a \n
+          codigo = codigo.replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+
+          setBusy(true);
+          showResult('Enviando código al servidor...', true);
+
+          try {
+            const response = await fetch('/api', {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+              body: codigo
+            });
+
+            const texto = await response.text();
+
+            if (!response.ok) {
+              // Estado HTTP no OK: mostrar mensaje de error (ej. 400)
+              showResult(`ERROR ${response.status}:\n${texto}`, false);
+            } else {
+              // OK: mostrar salida
+              showResult(texto || 'OK', true);
+            }
+          } catch (err) {
+            console.error('Error fetch:', err);
+            showResult('Error de conexión o de red. Revisa la consola.\n' + (err && err.message ? err.message : ''), false);
+          } finally {
+            setBusy(false);
+          }
+        }
+
+        // Click en compilar
+        compilarBtn.addEventListener('click', runCode);
+
+        // También ejecutar con Ctrl+Enter desde cualquier parte (global)
+        window.addEventListener('keydown', function(e){
+          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            // evita duplicar cuando editor ya lo maneja
+            if (document.activeElement !== editor) {
+              e.preventDefault();
+              runCode();
+            }
+          }
+        });
+
+      })();
+    </script>
+  </body>
+</html>
+

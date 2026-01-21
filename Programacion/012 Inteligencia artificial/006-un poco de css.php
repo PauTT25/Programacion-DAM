@@ -13,7 +13,7 @@
     <?php
       $OLLAMA_URL = "http://localhost:11434/api/generate";
       $MODEL = "qwen2.5:3b-instruct";
-      $prompt = "Explica qué es PHP.";
+      $prompt = "Dime quién es Pau Contreras Romero. Responde en español.";
       $data = [
           "model" => $MODEL,
           "prompt" => $prompt,

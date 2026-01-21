@@ -1,5 +1,8 @@
 <?php
 
+// sudo apt install php php-curl
+// sudo service apache2 restart
+
 $OLLAMA_URL = "http://localhost:11434/api/generate";
 $MODEL = "qwen2.5:3b-instruct";
 

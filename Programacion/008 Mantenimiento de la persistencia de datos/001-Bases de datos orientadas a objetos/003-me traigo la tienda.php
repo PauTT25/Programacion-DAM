@@ -180,6 +180,8 @@
         "email":email_cliente
       }
       console.log(pedido)
+      // Y los envio para guardar
+      fetch("guardamongo.php?json="+JSON.stringify(pedido))
     }
   </script>
 </html>

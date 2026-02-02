@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Tienda</title>
+    <style>
+      body, html {
+  padding: 0;
+  margin: 0;
+  font-family: ubuntu, sans-serif;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+  background: black;
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+main {
+  flex: 1;
+  padding: 10px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+#productos div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+article {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  padding: 10px 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: #222;
+  color: white;
+}
+
+button:active {
+  background: #444;
+}
+
+section input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+#enviar {
+  background: black;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#enviar:active {
+  background: #444;
+}
+
+    </style>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <header>
+      <h1>Microtienda</h1>
+    </header>
+    <main>
+      <section id="productos">
+        <h3>Productos</h3>
+        <div>
+          <article>
+            <h4>Zapatillas</h4>
+            <button nombre="zapatillas">30€</button>
+          </article>
+          <article>
+            <h4>Pantalones</h4>
+            <button nombre="pantalones">20€</button>
+          </article>
+          <article>
+            <h4>Camiseta</h4>
+            <button nombre="camiseta">40€</button>
+          </article>
+        </div>
+      </section>
+      <section>
+        <h3>Datos de cliente</h3>
+        <div>
+          <input type="text" id="nombre" placeholder="Nombre">
+          <input type="text" id="apellidos" placeholder="Apellidos">
+          <input type="text" id="email" placeholder="Email">
+          <div id="enviar">Enviar pedido</div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      (c) 2026 Pau Contreras Romero
+    </footer>
+  </body>
+  <script>
+    var pedido = {
+    	cliente:{},
+      productos:[],
+      pedido:{}
+    };
+    ///// Atrapa productos y los mete en el carro
+    let botones = document.querySelectorAll("button");
+    botones.forEach(function(boton){
+    	boton.onclick = function(){
+      	pedido.productos.push({
+          "nombre":this.getAttribute("nombre"),
+        	"precio":this.textContent
+        })
+        console.log(pedido)
+      }
+    })
+   /////// Atrapa los datos del cliente
+    let boton_enviar = document.querySelector("#enviar");
+    boton_enviar.onclick = function(){
+      let nombre_cliente = document.querySelector("#nombre").value;
+      let apellidos_cliente = document.querySelector("#apellidos").value;
+      let email_cliente = document.querySelector("#email").value;
+      pedido.cliente = {
+        "nombre":nombre_cliente,
+        "apellidos":apellidos_cliente,
+        "email":email_cliente
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Gráfica Circular</title>
+
+<style>
+  body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#eef2ff,#c7d2fe);
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  canvas{
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  }
+</style>
+</head>
+
+<body>
+
+<canvas id="grafica" width="420" height="420"></canvas>
+
+<script>
+const canvas = document.getElementById("grafica");
+const ctx = canvas.getContext("2d");
+
+const W = canvas.width;
+const H = canvas.height;
+const cx = W / 2;
+const cy = H / 2;
+const radioExterior = 150;
+const radioInterior = 70;
+
+const colores = [
+  "#1F77B4","#4E79A7","#2C7BE5",
+  "#17BECF","#00B4D8","#48CAE4",
+  "#2CA02C","#52B788","#74C69D",
+  "#F1C40F","#F4A261","#E9C46A",
+  "#E63946","#D62828","#EF476F",
+  "#6F42C1","#8338EC","#9D4EDD"
+];
+
+const datos = [25,25,25,45,67];
+const total = datos.reduce((a,b)=>a+b,0);
+
+// ----- TÍTULO -----
+ctx.fillStyle = "#1f2933";
+ctx.font = "600 20px Segoe UI";
+ctx.textAlign = "center";
+ctx.fillText("Distribución de datos", cx, 35);
+
+// ----- GRÁFICA -----
+let cursor = -Math.PI / 2;
+
+datos.forEach((dato, i) => {
+  const fraccion = dato / total;
+  const angulo = fraccion * Math.PI * 2;
+  const inicio = cursor;
+  const fin = cursor + angulo;
+
+  // Sombra
+  ctx.shadowColor = "rgba(0,0,0,0.15)";
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetY = 4;
+
+  // Sector
+  ctx.beginPath();
+  ctx.arc(cx, cy, radioExterior, inicio, fin);
+  ctx.arc(cx, cy, radioInterior, fin, inicio, true);
+  ctx.closePath();
+  ctx.fillStyle = colores[i % colores.length];
+  ctx.fill();
+
+  // Borde blanco
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = "white";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Texto
+  const angTexto = inicio + angulo / 2;
+  const rTexto = (radioExterior + radioInterior) / 2;
+
+  const xTexto = cx + Math.cos(angTexto) * rTexto;
+  const yTexto = cy + Math.sin(angTexto) * rTexto;
+
+  ctx.fillStyle = "#111";
+  ctx.font = "600 13px Segoe UI";
+  ctx.fillText(
+    `${dato} (${Math.round(fraccion*100)}%)`,
+    xTexto,
+    yTexto
+  );
+
+  cursor = fin;
+});
+
+// ----- CENTRO -----
+ctx.beginPath();
+ctx.arc(cx, cy, radioInterior - 5, 0, Math.PI * 2);
+ctx.fillStyle = "white";
+ctx.fill();
+
+ctx.fillStyle = "#374151";
+ctx.font = "700 16px Segoe UI";
+ctx.fillText("Total", cx, cy - 5);
+ctx.font = "600 14px Segoe UI";
+ctx.fillText(total, cx, cy + 15);
+</script>
+
+</body>
+</html>
+

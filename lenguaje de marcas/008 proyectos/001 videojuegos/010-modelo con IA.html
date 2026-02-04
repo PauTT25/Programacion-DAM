@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Pulse Rift</title>
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  background:#02030a;
+  overflow:hidden;
+  font-family:sans-serif;
+}
+canvas{display:block}
+#ui{
+  position:fixed;
+  top:15px;
+  left:15px;
+  color:#7df9ff;
+  font-size:16px;
+}
+#overlay{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#081428,#02030a);
+  color:#7df9ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:10;
+}
+</style>
+</head>
+<body>
+
+<div id="overlay">
+  <div>
+    <h1>Pulse Rift</h1>
+    <p>
+      Objetivo:<br>
+      Recolecta <b>5 núcleos de energía</b> usando el pulso<br>
+      y sobrevive <b>20 segundos más</b>.<br><br>
+
+      WASD → mover nave<br>
+      ESPACIO → pulso de conversión<br><br>
+
+      Los drones solo pueden ser convertidos con el pulso.<br>
+      Huir no es suficiente.<br><br>
+
+      <b>Pulsa ESPACIO para comenzar</b>
+    </p>
+  </div>
+</div>
+
+<div id="ui"></div>
+<canvas></canvas>
+
+<script>
+const canvas = document.querySelector("canvas")
+const ctx = canvas.getContext("2d")
+function resize(){
+  canvas.width = innerWidth
+  canvas.height = innerHeight
+}
+window.onresize = resize
+resize()
+
+const keys = {}
+let iniciado=false
+let tiempo=0
+let vida=100
+let nucleos=0
+let faseFinal=false
+
+/* ---------- JUGADOR (NAVE) ---------- */
+class Jugador{
+  constructor(){
+    this.x=canvas.width/2
+    this.y=canvas.height/2
+    this.vx=this.vy=0
+    this.vel=3.2
+    this.pulso=0
+    this.carga=1
+  }
+
+  update(){
+    if(keys.w) this.vy-=this.vel
+    if(keys.s) this.vy+=this.vel
+    if(keys.a) this.vx-=this.vel
+    if(keys.d) this.vx+=this.vel
+
+    this.vx*=0.9
+    this.vy*=0.9
+    this.x+=this.vx
+    this.y+=this.vy
+
+    this.carga=Math.min(1,this.carga+0.003)
+    if(this.pulso>0) this.pulso-=6
+  }
+
+  emitirPulso(){
+    if(this.carga>=1){
+      this.pulso=300
+      this.carga=0
+    }
+  }
+
+  draw(){
+    // Pulso
+    if(this.pulso>0){
+      let g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.pulso)
+      g.addColorStop(0,"rgba(0,200,255,0.4)")
+      g.addColorStop(1,"rgba(0,200,255,0)")
+      ctx.fillStyle=g
+      ctx.beginPath()
+      ctx.arc(this.x,this.y,this.pulso,0,Math.PI*2)
+      ctx.fill()
+    }
+
+    // Nave
+    ctx.save()
+    ctx.translate(this.x,this.y)
+    ctx.shadowBlur=30
+    ctx.shadowColor="#00c8ff"
+    ctx.fillStyle="#7df9ff"
+    ctx.beginPath()
+    ctx.moveTo(18,0)
+    ctx.lineTo(-12,-8)
+    ctx.lineTo(-8,0)
+    ctx.lineTo(-12,8)
+    ctx.closePath()
+    ctx.fill()
+    ctx.restore()
+    ctx.shadowBlur=0
+  }
+}
+
+/* ---------- NPC / DRON ---------- */
+class Npc{
+  constructor(){
+    this.x=Math.random()*canvas.width
+    this.y=Math.random()*canvas.height
+    this.vx=(Math.random()-0.5)*3
+    this.vy=(Math.random()-0.5)*3
+    this.stun=0
+    this.convertido=false
+  }
+
+  update(j){
+    if(this.convertido) return
+
+    let dx=j.x-this.x
+    let dy=j.y-this.y
+    let d=Math.hypot(dx,dy)
+
+    if(j.pulso>0 && d<j.pulso){
+      this.stun=120
+    }
+
+    if(this.stun>0){
+      this.stun--
+      if(this.stun===0) this.convertido=true
+      return
+    }
+
+    this.vx+=dx/d*0.08
+    this.vy+=dy/d*0.08
+    this.vx=Math.max(-5,Math.min(5,this.vx))
+    this.vy=Math.max(-5,Math.min(5,this.vy))
+    this.x+=this.vx
+    this.y+=this.vy
+
+    if(d<20) vida-=0.5
+  }
+
+  draw(){
+    if(this.convertido){
+      ctx.fillStyle="#00ffcc"
+      ctx.beginPath()
+      ctx.arc(this.x,this.y,6,0,Math.PI*2)
+      ctx.fill()
+      return
+    }
+
+    ctx.fillStyle=this.stun>0?"#ffff88":"#ff6666"
+    ctx.beginPath()
+    ctx.ellipse(this.x,this.y,8,6,Math.sin(Date.now()/200)*0.3,0,Math.PI*2)
+    ctx.fill()
+  }
+}
+
+/* ---------- JUEGO ---------- */
+const jugador=new Jugador()
+const npcs=Array.from({length:18},()=>new Npc())
+let last=performance.now()
+
+function loop(t){
+  const dt=(t-last)/1000
+  last=t
+
+  ctx.fillStyle="rgba(5,10,20,0.35)"
+  ctx.fillRect(0,0,canvas.width,canvas.height)
+
+  if(iniciado){
+    tiempo+=dt
+    jugador.update()
+    jugador.draw()
+
+    npcs.forEach(n=>{
+      n.update(jugador)
+      n.draw()
+      if(n.convertido){
+        let d=Math.hypot(n.x-jugador.x,n.y-jugador.y)
+        if(d<20){
+          nucleos++
+          n.convertido=false
+          n.x=Math.random()*canvas.width
+          n.y=Math.random()*canvas.height
+        }
+      }
+    })
+
+    if(nucleos>=5 && !faseFinal){
+      faseFinal=true
+      tiempo=0
+    }
+
+    if(faseFinal && tiempo>=20){
+      alert("Has estabilizado la nave.")
+      location.reload()
+    }
+
+    if(vida<=0){
+      alert("La nave ha colapsado.")
+      location.reload()
+    }
+
+    document.getElementById("ui").innerText=
+      `Vida: ${Math.floor(vida)}  Núcleos: ${nucleos}/5  Pulso: ${Math.floor(jugador.carga*100)}%`
+  }
+
+  requestAnimationFrame(loop)
+}
+requestAnimationFrame(loop)
+
+onkeydown=e=>{
+  keys[e.key]=true
+  if(e.code==="Space"){
+    if(!iniciado){
+      iniciado=true
+      document.getElementById("overlay").style.display="none"
+    }else jugador.emitirPulso()
+  }
+}
+onkeyup=e=>keys[e.key]=false
+</script>
+</body>
+</html>
+

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>PCBuilder · PCs a Medida</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:system-ui, sans-serif;
+  background:#0b0f1a;
+  color:#e6e6e6;
+  line-height:1.6;
+}
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:auto;
+}
+
+/* Header */
+header{
+  background:#02030a;
+  border-bottom:1px solid #111;
+}
+
+.header-content{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 0;
+}
+
+.logo{
+  font-size:1.6rem;
+  font-weight:bold;
+}
+
+.logo span{
+  color:#4cc9f0;
+}
+
+nav a{
+  color:#e6e6e6;
+  margin-left:20px;
+  text-decoration:none;
+  font-size:.95rem;
+}
+
+nav a:hover{
+  color:#4cc9f0;
+}
+
+/* Hero */
+.hero{
+  background:radial-gradient(circle at top,#111633,#02030a);
+  padding:100px 0;
+  text-align:center;
+}
+
+.hero h1{
+  font-size:2.6rem;
+  margin-bottom:20px;
+}
+
+.hero h1 span{
+  color:#4cc9f0;
+}
+
+.hero p{
+  max-width:700px;
+  margin:auto;
+  font-size:1.1rem;
+}
+
+.btn-primary{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 32px;
+  background:#4cc9f0;
+  color:#02030a;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:6px;
+}
+
+/* Services */
+.services{
+  padding:80px 0;
+}
+
+.services h2{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+}
+
+.service-card{
+  background:#0f1424;
+  padding:30px;
+  border-radius:10px;
+  border:1px solid #1b2240;
+}
+
+.service-card h3{
+  color:#4cc9f0;
+  margin-bottom:15px;
+}
+
+/* Value */
+.value{
+  background:#02030a;
+  padding:80px 0;
+}
+
+.value h2{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.value-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+}
+
+.value-grid h4{
+  color:#4cc9f0;
+  margin-bottom:10px;
+}
+
+/* CTA */
+.cta{
+  background:linear-gradient(135deg,#4cc9f0,#4361ee);
+  color:#02030a;
+  text-align:center;
+  padding:80px 0;
+}
+
+.btn-secondary{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 32px;
+  background:#02030a;
+  color:#fff;
+  text-decoration:none;
+  border-radius:6px;
+}
+
+/* Footer */
+footer{
+  background:#02030a;
+  padding:30px 0;
+  text-align:center;
+  font-size:.9rem;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container header-content">
+    <div class="logo">PC<span>Builder</span></div>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#diferencial">Por qué PCBuilder</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>PCs a medida, <span>como tú los imaginas</span></h1>
+    <p>
+      Diseña, personaliza y compra tu PC gaming o de oficina con un configurador visual
+      que te muestra cada componente en tiempo real.
+    </p>
+    <a href="#" class="btn-primary">Crear mi PC</a>
+  </div>
+</section>
+
+<section id="servicios" class="services">
+  <div class="container">
+    <h2>Nuestros servicios</h2>
+
+    <div class="service-grid">
+      <div class="service-card">
+        <h3>PC Gaming</h3>
+        <p>
+          Equipos optimizados para rendimiento, refrigeración y estética.
+          Elige cada componente y visualízalo en la torre antes de comprar.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <h3>PC Oficina & Empresa</h3>
+        <p>
+          Soluciones fiables para trabajo, estudios y empresas.
+          Configuraciones estables, escalables y adaptadas a tu presupuesto.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="diferencial" class="value">
+  <div class="container">
+    <h2>¿Por qué PCBuilder?</h2>
+
+    <div class="value-grid">
+      <div>
+        <h4>Configuración visual</h4>
+        <p>Ves el PC antes de comprarlo. Sin sorpresas.</p>
+      </div>
+      <div>
+        <h4>Compatibilidad garantizada</h4>
+        <p>Solo componentes compatibles con tu torre y tu uso.</p>
+      </div>
+      <div>
+        <h4>Venta directa</h4>
+        <p>Sin intermediarios. Mejor precio y control total.</p>
+      </div>
+      <div>
+        <h4>Soporte técnico</h4>
+        <p>Asesoramiento real antes y después de la compra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>Empieza a construir tu PC hoy</h2>
+    <p>Gaming o trabajo. Diseñado por ti. Montado por profesionales.</p>
+    <a href="#" class="btn-secondary">Ir al configurador</a>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="container">
+    <p>© 2026 PCBuilder · Valencia · España</p>
+    <p>Contacto: info@pcbuilder.es</p>
+  </div>
+</footer>
+
+</body>
+</html>
